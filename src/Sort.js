@@ -1,4 +1,4 @@
-class SomeKindOfSort {
+class MergeSort {
   constructor(array) {
     this.array = array;
   }
@@ -11,4 +11,4 @@ class SomeKindOfSort {
   }
 }
 
-module.exports = SomeKindOfSort;
+module.exports = MergeSort;
