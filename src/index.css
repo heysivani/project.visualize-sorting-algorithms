@@ -5,11 +5,13 @@ h1 {
   color: #f0cde0;
   font-size: 100px;
   font-family: monospace;
+  margin-left: 50px;
 }
 h2 {
   color: #f0cde0;
   font-size: 30px;
   font-family: monospace;
+  margin-left: 50px;
 }
 p {
   color: #f0cde0;
@@ -27,8 +29,13 @@ p {
 #inputField {
   font-size: 20px;
   color: rgb(155, 5, 110);
+  margin-left: 50px;
 }
 button {
   color: rgb(155, 5, 110);
-  background-color: aqua;
+  background-color: rgb(248, 206, 229);
+  font-family: monospace;
+  padding: 10px;
+  margin-left: 20px;
+  position: relative;
 }

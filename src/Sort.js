@@ -1,7 +1,12 @@
+const window = require("./app");
+
 class MergeSort {
   constructor(array) {
     this.unsorted = array;
     this.sorted = [];
+    this.step = 0;
+    this.unsortedSteps = [];
+    this.sortedSteps = [];
   }
   merge(left, right) {
     // https://medium.com/javascript-in-plain-english/javascript-merge-sort-3205891ac060
@@ -26,6 +31,13 @@ class MergeSort {
     return merged.concat(left.slice(indexL)).concat(right.slice(indexR));
   }
   sort(array = this.unsorted) {
+    // TEST EVENT
+    if (this.step === 0) {
+      const sortEvent = new CustomEvent("call sort");
+      document.dispatchEvent(sortEvent);
+      this.step++;
+    }
+
     // if array contains less than 2 elements, it can't be divided further
     if (array.length < 2) {
       // merge it and exit this recursive call
