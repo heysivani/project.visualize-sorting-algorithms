@@ -1,12 +1,15 @@
-const window = require("./app");
+const { app } = require("./app");
 
 class MergeSort {
   constructor(array) {
     this.unsorted = array;
     this.sorted = [];
-    this.step = 0;
+
+    // for visualization
+    this.stepCount = 0;
     this.unsortedSteps = [];
     this.sortedSteps = [];
+    this.mergedSteps = [];
   }
   merge(left, right) {
     // https://medium.com/javascript-in-plain-english/javascript-merge-sort-3205891ac060
@@ -32,10 +35,10 @@ class MergeSort {
   }
   sort(array = this.unsorted) {
     // TEST EVENT
-    if (this.step === 0) {
+    if (this.stepCount === 0) {
       const sortEvent = new CustomEvent("call sort");
       document.dispatchEvent(sortEvent);
-      this.step++;
+      this.stepCount++;
     }
 
     // if array contains less than 2 elements, it can't be divided further
@@ -52,13 +55,35 @@ class MergeSort {
     const unsortedLeft = array.slice(0, mid);
     const unsortedRight = array.slice(mid);
 
+    // for visualization - object that stores left and right *unsorted* arrays
+    let unsortedCombo = {};
+    unsortedCombo.left = unsortedLeft;
+    unsortedCombo.right = unsortedRight;
+    this.unsortedSteps.push(unsortedCombo);
+
     // recurse with left and right half
     let sortedLeft = this.sort(unsortedLeft);
     let sortedRight = this.sort(unsortedRight);
 
+    // for visualization - object that stores left and right *sorted* arrays
+    let sortedCombo = {};
+    sortedCombo.left = sortedLeft;
+    sortedCombo.right = sortedRight;
+    this.sortedSteps.push(sortedCombo);
+
+    // for visualization - store merged arrays
+    let mergedStep = this.merge(sortedLeft, sortedRight);
+    this.mergedSteps.push(mergedStep);
+
     // merge once both sides are sorted
-    console.log("result " + this.merge(sortedLeft, sortedRight));
     return this.merge(sortedLeft, sortedRight);
+  }
+  printSteps() {
+    console.log("print!");
+    console.log("unsorted " + JSON.stringify(this.unsortedSteps));
+    console.log("sorted " + JSON.stringify(this.sortedSteps));
+    console.log("merged " + JSON.stringify(this.mergedSteps));
+    return;
   }
 }
 

@@ -5,6 +5,8 @@ const MergeSort = require("./Sort");
 require("./index.css");
 
 window.onload = () => {
+  let result;
+
   // INPUT FIELD
 
   // input field for array
@@ -37,16 +39,26 @@ window.onload = () => {
     // remove other stuff on screen
     document.getElementById("input-box").remove();
 
+    // add step button
+    const stepButton = document.createElement("button");
+    stepButton.innerText = "Next";
+    stepButton.id = "stepButton";
+    document.getElementById("steps-div").appendChild(stepButton);
+
     const unsorted = [];
     const strings = inputField.value.split(",");
 
-    console.log("strings " + strings);
     // convert strings to ints
     for (let element of strings) {
       let num = parseInt(element, 10);
       unsorted.push(num);
     }
     console.log("UNSORTED ARRAY: " + unsorted);
+
+    let myUnsorted = document.createElement("h2");
+    myUnsorted.id = "unsorted";
+    myUnsorted.innerText = "Unsorted: " + unsorted;
+    document.getElementById("title").appendChild(myUnsorted);
 
     sortIt(unsorted);
 
@@ -59,8 +71,25 @@ window.onload = () => {
 
   function sortIt(array) {
     const mergeSort = new MergeSort(array);
-    const result = mergeSort.sort();
-    displayResult(result);
+    result = mergeSort.sort();
+
+    // remove later - just for my own reference in console
+    mergeSort.printSteps();
+    stepByStep(mergeSort);
+    // display result here too?
+    //displayResult(result);
+    return;
+  }
+
+  function stepByStep(obj) {
+    const title = document.getElementById("title");
+    let newStep = document.createElement("div");
+    newStep.id = "step";
+    newStep.innerText = "[" + obj.unsortedSteps[0].left + "]";
+    newStep.innerText += "[" + obj.unsortedSteps[0].right + "]";
+    title.appendChild(newStep);
+
+    //obj.unsortedS teps[0];
   }
 
   function displayResult(result) {
@@ -73,16 +102,15 @@ window.onload = () => {
     resultHeader.id = "result";
     const textNode = document.createTextNode(string);
     resultHeader.appendChild(textNode);
-    document.getElementById("array").appendChild(resultHeader);
+    document.getElementById("title").appendChild(resultHeader);
     return;
   }
 
   // TILES
 
-  const box = document.createElement("div");
-  box.setAttribute("id", "tile");
-
-  document.getElementById("array").appendChild(box);
+  // const box = document.createElement("div");
+  // box.setAttribute("id", "tile");
+  // document.getElementById("array").appendChild(box);
 
   const test = document.createElement("h1");
   test.innerText = "Merge Sort";

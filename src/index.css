@@ -31,6 +31,30 @@ p {
   color: rgb(155, 5, 110);
   margin-left: 50px;
 }
+#stepButton {
+  color: rgb(155, 5, 110);
+  background-color: rgb(248, 206, 229);
+  font-family: monospace;
+  padding: 10px;
+  margin-left: 1350px;
+  margin-top: 450px;
+  position: relative;
+}
+#result {
+  color: #f0cde0;
+  font-size: 50px;
+  font-family: monospace;
+}
+#unsorted {
+  color: #f0cde0;
+  font-size: 50px;
+  font-family: monospace;
+}
+#step {
+  color: #f0cde0;
+  font-size: 50px;
+  font-family: monospace;
+}
 button {
   color: rgb(155, 5, 110);
   background-color: rgb(248, 206, 229);
