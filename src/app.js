@@ -18,10 +18,7 @@ window.onload = () => {
 
   // input field description
   const inputTitle = document.createElement("h2");
-  const inputExplainer = document.createElement("p");
-  inputExplainer.innerText = "Range: 1 to 10";
   inputTitle.innerText = "Enter a list of numbers separated by commas";
-  inputTitle.append(inputExplainer);
   document.getElementById("input-box").prepend(inputTitle);
 
   // clear example text on click
@@ -40,10 +37,10 @@ window.onload = () => {
     document.getElementById("input-box").remove();
 
     // add step button
-    const stepButton = document.createElement("button");
-    stepButton.innerText = "Next";
-    stepButton.id = "stepButton";
-    document.getElementById("steps-div").appendChild(stepButton);
+    // const stepButton = document.createElement("button");
+    // stepButton.innerText = "Next";
+    // stepButton.id = "stepButton";
+    // document.getElementById("title").appendChild(stepButton);
 
     const unsorted = [];
     const strings = inputField.value.split(",");
@@ -57,7 +54,8 @@ window.onload = () => {
 
     let myUnsorted = document.createElement("h2");
     myUnsorted.id = "unsorted";
-    myUnsorted.innerText = "Unsorted: " + unsorted;
+    myUnsorted.innerText = "Before sort: " + unsorted;
+
     document.getElementById("title").appendChild(myUnsorted);
 
     sortIt(unsorted);
@@ -82,14 +80,35 @@ window.onload = () => {
   }
 
   function stepByStep(obj) {
-    const title = document.getElementById("title");
-    let newStep = document.createElement("div");
-    newStep.id = "step";
-    newStep.innerText = "[" + obj.unsortedSteps[0].left + "]";
-    newStep.innerText += "[" + obj.unsortedSteps[0].right + "]";
-    title.appendChild(newStep);
+    const leftCol = document.getElementById("leftCol");
+    const rightCol = document.getElementById("rightCol");
+    const midCol = document.getElementById("midCol");
 
-    //obj.unsortedS teps[0];
+    let leftDisplay = document.createElement("p");
+    let rightDisplay = document.createElement("p");
+    let midDisplay = document.createElement("p");
+    leftDisplay.id = "step";
+    rightDisplay.id = "step";
+    midDisplay.id = "midstep";
+
+    for (let i = 0; i < obj.unsortedSteps.length; i++) {
+      //leftDisplay.innerText += "Unsorted half: [" + obj.unsortedSteps[i].left + "]\n\n";
+      leftDisplay.innerText +=
+        "\n\nLeft side: [" + obj.sortedSteps[i].left + "]\n";
+
+      //rightDisplay.innerText += "\nUnsorted half: [" + obj.unsortedSteps[i].right + "]\n\n";
+      rightDisplay.innerText +=
+        "\n\nRight side: [" + obj.sortedSteps[i].right + "]\n";
+
+      midDisplay.innerText += "\nMerged: [" + obj.mergedSteps[i] + "]\n";
+
+      leftCol.appendChild(leftDisplay);
+      midCol.appendChild(midDisplay);
+      rightCol.appendChild(rightDisplay);
+    }
+
+    document.getElementById("unsorted").innerText +=
+      "\nAfter sort: " + obj.mergedSteps[obj.mergedSteps.length - 1];
   }
 
   function displayResult(result) {
